@@ -57,14 +57,52 @@ async function load() {
   firstNames();
   console.log(firstNamesList);
 
-  // function renderNames() {
-  //   const renderLocation = document.getElementsById("people");
-  //   const nameContainer = document.createElement("div");
-  //   const studentName = document.createTextNode(`${firstNamesList[0]}`);
-  //   renderLocation.appendChild(nameContainer);
-  //   nameContainer.appendChild(studentName);
-  // }
-  // renderNames();
+  function renderNames() {
+    const renderLocation = document.getElementById("people");
+    const nameCounts = {};
+
+    firstNamesList.forEach((i) => {
+      const nameContainer = document.createElement("div");
+      const studentName = document.createElement("h1");
+      const btnOne = document.createElement("button");
+      const btnCount = document.createElement("button");
+      const btnTwo = document.createElement("button");
+
+      studentName.textContent = `${i}`;
+      btnOne.textContent = "+";
+      btnTwo.textContent = "-";
+      btnCount.textContent = "1";
+
+      nameContainer.appendChild(studentName);
+      studentName.appendChild(btnOne);
+      studentName.appendChild(btnCount);
+      studentName.appendChild(btnTwo);
+      renderLocation.appendChild(nameContainer);
+
+      btnOne.addEventListener("click", () => {
+        firstNamesList.push(i);
+        nameCounts[i] = (nameCounts[i] || 1) + 1;
+        btnCount.textContent = nameCounts[i].toString();
+
+        console.log(firstNamesList);
+      });
+      btnTwo.addEventListener("click", () => {
+        const index = firstNamesList.indexOf(i);
+        nameCounts[i] = (nameCounts[i] || 1) - 1;
+        btnCount.textContent = nameCounts[i].toString();
+        if (nameCounts[name] > 0) {
+          nameCounts[name] = nameCounts[name] - 1;
+        }
+
+        if (index !== -1) {
+          firstNamesList.splice(index, 1);
+        }
+        console.log(firstNamesList);
+      });
+    });
+  }
+  renderNames();
+  console.log(renderNames);
 
   let button = document.getElementById("random-button");
   button.addEventListener("click", () => {
