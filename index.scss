@@ -2,16 +2,29 @@ body {
   margin: 0;
   display: flex;
   flex-direction: row;
+  font-family: "Tektur", cursive;
   .scroll {
     background-color: #0ea5e9;
     h1 {
       display: flex;
-
       justify-content: center;
+    }
+    #people {
+      div {
+        h1 {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        button {
+          margin: 2px;
+          height: 24px;
+          width: 24px;
+        }
+      }
     }
   }
   .name-genorator {
-    // border: 1px green;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -23,13 +36,13 @@ body {
       font-size: 100px;
     }
     button {
-      // margin-left: 35%;
       height: 75px;
       width: 190px;
       font-size: 20px;
       border-radius: 40px;
       background-color: #0ea5e9;
       box-shadow: -1px 22px 37px -6px rgba(0, 0, 0, 0.27);
+      font-family: "Tektur", cursive;
     }
     button:hover {
       cursor: pointer;

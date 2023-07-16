@@ -3,8 +3,8 @@ scrollableDiv.style.overflow = "scroll";
 scrollableDiv.style.height = "100vh";
 scrollableDiv.style.width = "30vw";
 
-const email = "hunter@devpipeline.com";
-const pass = "One2threesf@1";
+const email = "-enter here-";
+const pass = "-enter here-";
 const userData = {
   email: email,
   password: pass,
@@ -67,16 +67,29 @@ async function load() {
       const btnOne = document.createElement("button");
       const btnCount = document.createElement("button");
       const btnTwo = document.createElement("button");
+      const line = document.createElement("hr");
 
       studentName.textContent = `${i}`;
       btnOne.textContent = "+";
+      btnOne.style.backgroundColor = "yellow";
+      btnOne.style.borderColor = "yellow";
+      btnOne.style.marginLeft = "36%";
+      btnOne.style.borderRadius = "40px";
+
       btnTwo.textContent = "-";
+      btnTwo.style.backgroundColor = " red";
+      btnTwo.style.borderColor = "red";
+      btnTwo.style.borderRadius = "40px";
+
       btnCount.textContent = "1";
+      btnCount.style.border = " 1px transparent";
+      btnCount.style.borderRadius = "40px";
 
       nameContainer.appendChild(studentName);
-      studentName.appendChild(btnOne);
-      studentName.appendChild(btnCount);
-      studentName.appendChild(btnTwo);
+      nameContainer.appendChild(btnOne);
+      nameContainer.appendChild(btnCount);
+      nameContainer.appendChild(btnTwo);
+      nameContainer.appendChild(line);
       renderLocation.appendChild(nameContainer);
 
       btnOne.addEventListener("click", () => {
@@ -90,8 +103,8 @@ async function load() {
         const index = firstNamesList.indexOf(i);
         nameCounts[i] = (nameCounts[i] || 1) - 1;
         btnCount.textContent = nameCounts[i].toString();
-        if (nameCounts[name] > 0) {
-          nameCounts[name] = nameCounts[name] - 1;
+        if (nameCounts[i] > 0) {
+          nameCounts[i] = nameCounts[i] - 1;
         }
 
         if (index !== -1) {
@@ -106,7 +119,7 @@ async function load() {
 
   let button = document.getElementById("random-button");
   button.addEventListener("click", () => {
-    pickRandom();
+    blinker();
   });
 
   function pickRandom() {
@@ -115,7 +128,34 @@ async function load() {
 
     let resultLocation = document.getElementById("random-result");
     resultLocation.innerHTML = result;
-    console.log(result);
+
+    const h1Elements = document.querySelectorAll("#people h1");
+    h1Elements.forEach((h1) => {
+      if (h1.textContent === result) {
+        h1.style.backgroundColor = "#0284C7";
+        h1.style.color = "white";
+      } else {
+        h1.style.backgroundColor = "transparent";
+        h1.style.color = "black";
+      }
+    });
+  }
+
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
+  async function blinker() {
+    let sleeptime = 60;
+    const time = 15;
+    for (let i = 0; i < time; i++) {
+      const randomPicker = Math.floor(Math.random() * firstNamesList.length);
+      const div = document.getElementById("random-result");
+      div.innerHTML = firstNamesList[randomPicker];
+      sleeptime = sleeptime * 1.1;
+      await sleep(sleeptime);
+    }
+    pickRandom();
   }
 }
 load();
